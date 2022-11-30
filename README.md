@@ -1,2 +1,1 @@
-# IG-bot-tool
-Updated and improved version of my previous Instagram tool.
+# *BE CARFUL IF YOU DECIDE TO USE THIS TOOL ON YOUR MAIN ACCOUNT!*
