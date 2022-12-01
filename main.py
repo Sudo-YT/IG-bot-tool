@@ -41,7 +41,6 @@ account = input(f"[>] Is your username {logs['user']}? (y/n): ")
 
 if account == "n":
     print("[+] Open Login.json and edit your login")
-    sys.exit()
 
 if account == "y":
     hash = input("\n[>] Enter the hashtag you want to focus on: ")
@@ -52,6 +51,7 @@ if account == "y":
     if comment == "y":
         cmt = input("[>] What would you like to comment?: ")
     type = input("[>] Do you want to view top posts (t) or recent posts (r): ")
+    delay = input("[>] Enter a delay (Higher delay will be less detectable): ")
 
     time.sleep(1)
     print(f"\n[+] Loading {amount} posts in the '{hash}' hashtag...")
@@ -72,22 +72,19 @@ if account == "y":
         print("[+] Liking has begun!")
         for i, media in enumerate(medias):
             client.media_like(media.id)
-
-    if like == "n":
-        pass
+            time.sleep(int(delay))
 
     if follow == "y":
         print("[+] Following has begun!")
         for i, media in enumerate(medias):
             client.user_follow(media.user.pk)
-
-    if follow == "n":
-        pass
+            time.sleep(int(delay))
     
     try:
         if cmt == cmt:
             print("[+] Commenting has begun!")
             for i, media in enumerate(medias):
                 client.media_comment(media.id, cmt)
+                time.sleep(int(delay))
     except NameError:
-        sys.exit()
+        pass
