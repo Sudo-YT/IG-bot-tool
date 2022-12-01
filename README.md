@@ -1,5 +1,5 @@
 # Instagram bot tool
-- I strongly recommend making an alternate account and use that instead of your main.<br/>
+- When using this script, I strongly recommend using an alternate account.<br/>
 - This script inculdes mass liking, mass following, and mass commenting under a targeted hashtag.<br/>
 - This script will work better with a VPN but its really not needed.
 # How to use
