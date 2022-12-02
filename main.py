@@ -42,33 +42,70 @@ if account == "n":
     print("[+] Open Login.json and edit your login")
 
 if account == "y":
-    hash = input("\n[>] Enter the hashtag you want to focus on: ")
+    HashUser = input("\n[>] Do you want to target a hashtag or an account? (h/a): ")
+
+    if HashUser == "h":
+        hash = input("[>] Enter the hashtag you want to target: ")
+        type = input("[>] Do you want to view top posts (t) or recent posts (r): ")
+    if HashUser == "a":
+        acc = input("[>] Enter the account you want to target: ")
+
     amount = input("[>] Enter the amount of posts you want to view: ")
+
+    if HashUser == "a":
+        story = input("[>] Do you want to like their stories? (y/n): ")
+
     like = input("[>] Do you want to like the posts? (y/n): ")
     follow = input("[>] Do you want to follow the accounts? (y/n): ")
     comment = input("[>] Do you want to comment under the posts? (y/n): ")
+
     if comment == "y":
         cmt = input("[>] What would you like to comment?: ")
-    type = input("[>] Do you want to view top posts (t) or recent posts (r): ")
-    delay = input("[>] Enter a delay (Higher delay will be less detectable): ")
+
+    delay = input("[>] Enter a delay (Higher delay will be less detectable but will take longer): ")
 
     time.sleep(1)
-    print(f"\n[+] Loading {amount} posts in the '{hash}' hashtag...")
 
-    hashtag = hash
+    if HashUser == "h":
+        print(f"\n[+] Loading {amount} posts in the '{hash}' hashtag...")
+
+    if HashUser == "a":
+        print(f"\n[+] Loading {amount} posts from '{acc}' account...")
+        target = client.user_id_from_username(acc)
+        medias = client.user_medias(target, int(amount))
+        print(f"[+] {amount} have posts have been loaded!")
+        time.sleep(1)
 
     if type == "t":
-        medias = client.hashtag_medias_top(hashtag, int(amount))
+        medias = client.hashtag_medias_top(hash, int(amount))
         print(f"[+] {amount} have been posts loaded!")
         time.sleep(1)
 
     if type == "r":
-        medias = client.hashtag_medias_recent(hashtag, int(amount))
+        medias = client.hashtag_medias_recent(hash, int(amount))
         print(f"[+] {amount} posts have been loaded!")
         time.sleep(1)
 
+    try:
+        if story == "y":
+            print("[+] Story liking has begun!")
+            for media in medias:
+                stories_pk = []
+                user_pk = media.user.pk
+                stories = client.user_stories(int(user_pk), amount=1)
+
+                if stories:
+                    for story in stories:
+                        stories_pk.append(int(story.pk))
+                    client.story_seen(story_pks=stories_pk)
+
+                for one_story_id in stories_pk:
+                    client.story_like(story_id=one_story_id)
+    except NameError:
+        pass
+
     if like == "y":
-        print("[+] Liking has begun!")
+        print("[+] Post liking has begun!")
         for i, media in enumerate(medias):
             client.media_like(media.id)
             time.sleep(int(delay))
