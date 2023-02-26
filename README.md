@@ -7,7 +7,6 @@
 - Open `Login.json` then replace lines 2 and 3 with your Instagram credentials.
 - Run `main.py` then answer the questions asked.
 # Updates
-- You can now mass like stories.
-- You can now use the features under a targeted account.
+- Estimated time for each process
 ---
 *If you have suggestions or questions my Discord is sudo#3953.*
