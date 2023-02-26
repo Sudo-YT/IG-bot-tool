@@ -90,7 +90,7 @@ if account == "y":
         if story == "y":
             print("[+] Story liking has begun!")
             time.sleep(1)
-            print(f"[+] Story liking will take around {amount * delay * 1.5} seconds")
+            print(f"[+] Estimated time for story liking: {amount * delay * 1.5} seconds")
             for media in medias:
                 stories_pk = []
                 user_pk = media.user.pk
@@ -109,7 +109,7 @@ if account == "y":
     if like == "y":
         print("[+] Post liking has begun!")
         time.sleep(1)
-        print(f"[+] Post liking will take around {amount * delay * 1.5} seconds")
+        print(f"[+] Estimated time for post liking: {amount * delay * 1.5} seconds")
         for i, media in enumerate(medias):
             client.media_like(media.id)
             time.sleep(int(delay))
@@ -117,7 +117,7 @@ if account == "y":
     if follow == "y":
         print("[+] Following has begun!")
         time.sleep(1)
-        print(f"[+] Following will take around {amount * delay * 1.5} seconds")
+        print(f"[+] Estimated time for following: {amount * delay * 1.5} seconds")
         for i, media in enumerate(medias):
             client.user_follow(media.user.pk)
             time.sleep(int(delay))
@@ -126,7 +126,7 @@ if account == "y":
         if cmt == cmt:
             print("[+] Commenting has begun!")
             time.sleep(1)
-            print(f"[+] Commenting will take around {amount * delay * 1.5} seconds")
+            print(f"[+] Estimated time for commenting: {amount * delay * 1.5} seconds")
             for i, media in enumerate(medias):
                 client.media_comment(media.id, cmt)
                 time.sleep(int(delay))
