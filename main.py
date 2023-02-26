@@ -50,7 +50,7 @@ if account == "y":
     if HashUser == "a":
         acc = input("[>] Enter the account you want to target: ")
 
-    amount = input("[>] Enter the amount of posts you want to view: ")
+    amount = int(input("[>] Enter the amount of posts you want to view: "))
 
     if HashUser == "a":
         story = input("[>] Do you want to like their stories? (y/n): ")
@@ -62,7 +62,7 @@ if account == "y":
     if comment == "y":
         cmt = input("[>] What would you like to comment?: ")
 
-    delay = input("[>] Enter a delay (Higher delay will be less detectable but will take longer): ")
+    delay = int(input("[>] Enter a delay (Higher delay will be less detectable but will take longer): "))
 
     time.sleep(1)
 
@@ -70,7 +70,7 @@ if account == "y":
         print(f"\n[+] Loading {amount} posts in the '{hash}' hashtag...")
 
     if HashUser == "a":
-        print(f"\n[+] Loading {amount} posts from '{acc}' account...")
+        print(f"\n[+] Loading {amount} posts from '@{acc}'...")
         target = client.user_id_from_username(acc)
         medias = client.user_medias(target, int(amount))
         print(f"[+] {amount} have posts have been loaded!")
@@ -89,6 +89,8 @@ if account == "y":
     try:
         if story == "y":
             print("[+] Story liking has begun!")
+            time.sleep(1)
+            print(f"[+] Story liking will take around {amount * delay * 1.5} seconds")
             for media in medias:
                 stories_pk = []
                 user_pk = media.user.pk
@@ -106,12 +108,16 @@ if account == "y":
 
     if like == "y":
         print("[+] Post liking has begun!")
+        time.sleep(1)
+        print(f"[+] Post liking will take around {amount * delay * 1.5} seconds")
         for i, media in enumerate(medias):
             client.media_like(media.id)
             time.sleep(int(delay))
 
     if follow == "y":
         print("[+] Following has begun!")
+        time.sleep(1)
+        print(f"[+] Following will take around {amount * delay * 1.5} seconds")
         for i, media in enumerate(medias):
             client.user_follow(media.user.pk)
             time.sleep(int(delay))
@@ -119,6 +125,8 @@ if account == "y":
     try:
         if cmt == cmt:
             print("[+] Commenting has begun!")
+            time.sleep(1)
+            print(f"[+] Commenting will take around {amount * delay * 1.5} seconds")
             for i, media in enumerate(medias):
                 client.media_comment(media.id, cmt)
                 time.sleep(int(delay))
